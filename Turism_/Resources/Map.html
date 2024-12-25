@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2GIS Navi API</title>
+    <meta name="description" content="Navi API directions example" />
+    <style>
+        html, body, #container {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+    <script src="https://unpkg.com/@2gis/mapgl-directions@^2/dist/directions.js"></script>
+    <script>
+        const map = new mapgl.Map('container', {
+            center: [37.668598, 55.76259],
+            zoom: 13,
+            key: '030a3c7d-a324-4514-89b0-a771b08a1810',
+        });
+
+        const directions = new mapgl.Directions(map, {
+            directionsApiKey: '030a3c7d-a324-4514-89b0-a771b08a1810',
+        });
+
+        // Функция для построения маршрута
+        function buildRoute(firstPoint, secondPoint) {
+            directions.clear(); // Очистить текущий маршрут, если он есть
+            directions.carRoute({
+                points: [firstPoint, secondPoint],
+            });
+        }
+
+        // Инициализация маршрута по умолчанию
+        const initialFirstPoint = [37.6184, 55.7512]; // Москва, Кремль
+        const initialSecondPoint = [37.4419, 55.7038]; // Воробьевы горы
+        buildRoute(initialFirstPoint, initialSecondPoint);
+    </script>
+</body>
+</html>
